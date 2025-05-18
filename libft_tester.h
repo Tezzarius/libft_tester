@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:46:10 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 17:19:46 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/18 17:28:16 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	testtolower();
 void	teststrchr();
 void	teststrrchr();
 void	teststrncmp();
+void	testmemchr();
 
 #endif

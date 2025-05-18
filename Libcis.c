@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests1.c                                           :+:      :+:    :+:   */
+/*   Libcis.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:44:04 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 15:45:58 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:46:41 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,52 @@
 
 void	testisalpha()
 {
-	int	c;
+	int	i;
+	int	check;
 
-	c = 128;
 	printf("ft_isalpha: ");
-	if(ft_isalpha('9') == 0)
+	i = 0;
+	check = 0;
+	while (i < 65)
+	{
+		if (ft_isalpha(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isalpha('G') == 1)
+	check = 0;
+	while (i < 91)
+	{
+		if (ft_isalpha(i) == 0)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isalpha('$') == 0)
+	check = 0;
+	while (i < 97)
+	{
+		if (ft_isalpha(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isalpha(c) == 0)
+	check = 0;
+	while (i < 123)
+	{
+		if (ft_isalpha(i) == 0)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
@@ -39,23 +68,41 @@ void	testisalpha()
 
 void	testisdigit()
 {
-	int	c;
+	int	i;
+	int	check;
 
-	c = 128;
 	printf("ft_isdigit: ");
-	if(ft_isdigit('9') == 1)
+	i = 0;
+	check = 0;
+	while (i < 48)
+	{
+		if (ft_isdigit(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isdigit('G') == 0)
+	check = 0;
+	while (i < 58)
+	{
+		if (ft_isdigit(i) == 0)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isdigit('$') == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if(ft_isdigit(c) == 0)
+	check = 0;
+	while (i < 128)
+	{
+		if (ft_isdigit(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
@@ -64,23 +111,74 @@ void	testisdigit()
 
 void	testisalnum()
 {
-	int	c;
+	int	i;
+	int	check;
 
-	c = 128;
 	printf("ft_isalnum: ");
-	if(ft_isalnum('9') == 1)
+	i = 0;
+	check = 0;
+	while (i < 48)
+	{
+		if (ft_isalnum(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isalnum('G') == 1)
+	check = 0;
+	while (i < 58)
+	{
+		if (ft_isalnum(i) == 0)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isalnum('$') == 0)
+	check = 0;
+	while (i < 65)
+	{
+		if (ft_isalnum(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isalnum(c) == 0)
+	check = 0;
+	while (i < 91)
+	{
+		if (ft_isalnum(i) == 0)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	check = 0;
+	while (i < 97)
+	{
+		if (ft_isalnum(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	check = 0;
+	while (i < 123)
+	{
+		if (ft_isalnum(i) == 0)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
@@ -89,23 +187,19 @@ void	testisalnum()
 
 void	testisascii()
 {
-	int	c;
+	int	i;
+	int	check;
 
-	c = 128;
 	printf("ft_isascii: ");
-	if(ft_isascii('9') == 1)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if(ft_isascii('G') == 1)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if(ft_isascii('$') == 1)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if(ft_isascii(c) == 0)
+	i = 0;
+	check = 0;
+	while (i < 128)
+	{
+		if (ft_isascii(i) == 0)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
@@ -113,25 +207,41 @@ void	testisascii()
 }
 void	testisprint()
 {
-	int	c;
-	int	d;
+	int	i;
+	int	check;
 
-	c = 128;
-	d = 31;
 	printf("ft_isprint: ");
-	if(ft_isprint('9') == 1)
+	i = 0;
+	check = 0;
+	while (i < 32)
+	{
+		if (ft_isprint(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isprint('G') == 1)
+	check = 0;
+	while (i < 127)
+	{
+		if (ft_isprint(i) == 0)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_isprint(d) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if(ft_isprint(c) == 0)
+	check = 0;
+	while (i < 128)
+	{
+		if (ft_isprint(i) == 1)
+			check = 1;
+		i++;
+	}
+	if(check == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);

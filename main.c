@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:18:23 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 17:19:58 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:47:04 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	main()
 	teststrchr();
 	teststrrchr();
 	teststrncmp();
+	//testmemchr();
 	return 0;
 }

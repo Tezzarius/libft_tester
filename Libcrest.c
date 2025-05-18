@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:01:22 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 16:52:48 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:56:47 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,29 @@
 
 void	testbzero()
 {
-	char	str[10] = "Test";
-	int		sw;
-	int		i;
+	char	str[20] = "test me if you can";
 
-	sw = 0;
 	printf("ft_bzero:   ");
-	ft_bzero(str, 2);
-	i = 0;
-	while (str[i] && i < 2)
-	{
-		if (str[i] != '\0')
-		{
-			printf(RED "[KO] " RESET);
-			sw = 1;
-		}
-		i++;
-	}
-	if (sw == 0)
+	ft_bzero(str, 5);
+	if (tester_strncmp(str, "\0\0\0\0\0", 5) == 0)
 		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	ft_bzero(str, 8);
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0", 8) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
 	ft_bzero(str, 12);
-	i = 0;
-	while (str[i] && i < 12)
-	{
-		if (str[i] != '\0')
-		{
-			printf(RED "[KO] " RESET);
-			sw = 1;
-		}
-		i++;
-	}
-	if (sw == 0)
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0", 12) == 0)
 		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	ft_bzero(str, 16);
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
 	printf("\n");
 }
 

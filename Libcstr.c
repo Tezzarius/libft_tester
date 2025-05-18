@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:00:58 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 17:22:02 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:23:37 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	teststrlen()
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	if(ft_strlen(c) == 1)
+	if(ft_strlen("") == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	if(ft_strlen("     ") == 5)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
@@ -35,12 +39,30 @@ void	teststrlen()
 
 void	teststrlcpy()
 {
-	char	*str = "0123456789";
+	char	str[20] = "123456789";
+	char	str2[20] = "abcdefghi";
+	char	str3[20] = "ABCDEFGHI";
+	char	str4[20] = "!@#$^&*()";
 	char	dest[20] = "0";
 
 	printf("ft_strlcpy: ");
-	ft_strlcpy(dest, str, 7);
-	if (tester_strncmp(dest, "0123456", 7))
+	ft_strlcpy(dest, str, 3);
+	if (tester_strncmp(dest, "12", 3) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	ft_strlcpy(dest, str2, 5);
+	if (tester_strncmp(dest, "abcd", 5) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	ft_strlcpy(dest, str3, 7);
+	if (tester_strncmp(dest, "ABCDEF", 7) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	ft_strlcpy(dest, str4, 9);
+	if (tester_strncmp(dest, "!@#$^&*(", 9) == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
@@ -49,11 +71,26 @@ void	teststrlcpy()
 
 void	teststrlcat()
 {
-	char str[14] = "i";
+	char str[20] = "i ";
 
 	printf("ft_strlcat: ");
-	ft_strlcat(str, " don't know what i should write....", 15);
+	ft_strlcat(str, "don't know what i should write....", 5);
+	if (tester_strncmp(str, "i don't know what", 6))
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	ft_strlcat(str, " know what i should write....", 5);
+	if (tester_strncmp(str, "i don't know what", 11))
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	ft_strlcat(str, " what i should write....", 5);
 	if (tester_strncmp(str, "i don't know what", 16))
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	ft_strlcat(str, " i should write....", 5);
+	if (tester_strncmp(str, "i don't know what i should", 21))
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
@@ -63,11 +100,29 @@ void	teststrlcat()
 void	teststrchr()
 {
 	char 	str[] = "Tabula Rasa";
-	char 	to_find = 'a';
+	char 	to_find = 'l';
+	char	to_find2 = 'u';
+	char	to_find3 = 'b';
+	char	to_find4 = 'a';
 	char	*dest;
 
 	printf("ft_strchr:  ");
 	dest = ft_strchr(str, to_find);
+	if (tester_strncmp(dest, "la Rasa", 8) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_strchr(str, to_find2);
+	if (tester_strncmp(dest, "ula Rasa", 9) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_strchr(str, to_find3);
+	if (tester_strncmp(dest, "bula Rasa", 10) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_strchr(str, to_find4);
 	if (tester_strncmp(dest, "abula Rasa", 11) == 0)
 		printf(GREEN "[OK] " RESET);
 	else
@@ -78,16 +133,34 @@ void	teststrchr()
 void	teststrrchr()
 {
 	char 	str[] = "Tabula Rasa";
-	char 	to_find = 'a';
+	char 	to_find = 's';
+	char	to_find2 = 'R';
+	char	to_find3 = 'l';
+	char	to_find4 = 'b';
 	char	*dest;
 
 	printf("ft_strrchr: ");
 	dest = ft_strrchr(str, to_find);
-	if (tester_strncmp(dest, "a", 2) == 0)
+	if (tester_strncmp(dest, "sa", 3) == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
-	printf("\n");	
+	dest = ft_strrchr(str, to_find2);
+	if (tester_strncmp(dest, "Rasa", 5) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_strrchr(str, to_find3);
+	if (tester_strncmp(dest, "la Rasa", 8) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_strrchr(str, to_find4);
+	if (tester_strncmp(dest, "bula Rasa", 10) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	printf("\n");
 }
 
 void	teststrncmp()
