@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:32:41 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 21:06:28 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:15:46 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,60 @@ void	testmemmove()
 	printf("\n");
 }
 
-/* void	testmemchr()
+void	testmemchr()
 {
-	printf("ft_memchr:  ");
-	char *src = "/|\x12\xff\x09\0\x42\042\0\42|\\";
-	int size = 12;
+	char 	str[] = "Tabula Rasa";
+	char 	to_find = 'l';
+	char	to_find2 = 'u';
+	char	to_find3 = 'b';
+	char	to_find4 = 'a';
+	char	*dest;
 
-	printf("%s\n", ft_memchr(src, '\0', size));
+	printf("ft_memchr:  ");
+	dest = ft_memchr(str, to_find, 4);
+	if (!dest)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_memchr(str, to_find2, 4);
+	if (tester_strncmp(dest, "ula Rasa", 9) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_memchr(str, to_find3, 3);
+	if (tester_strncmp(dest, "bula Rasa", 10) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_memchr(str, to_find4, 6);
+	if (tester_strncmp(dest, "abula Rasa", 11) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
 	printf("\n");
-} */
+}
+void	testmemcmp()
+{
+	printf("ft_memcmp:  ");
+	if (ft_memcmp("Tabula Rasa", "Tabula Rasa", 5) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	if (ft_memcmp("Tabula Rasa", "TabuLa Rasa", 5) > 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	if (ft_memcmp("Tabula Rasa", "Tabuda Rasa", 5) > 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	if (ft_memcmp("Tab", "Tabula Rasa", 5) < 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	if (ft_memcmp("atoms\0\0\0\0", "atoms\0abc", 8) < 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	printf("\n");
+}

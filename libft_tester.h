@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:46:10 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 17:28:16 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:04:55 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 int	tester_strncmp(const char *s1, const char *s2, size_t n);
 
+//Libs functions
 void	testisalpha();
 void	testisdigit();
 void	testisalnum();
@@ -40,5 +41,13 @@ void	teststrchr();
 void	teststrrchr();
 void	teststrncmp();
 void	testmemchr();
+void	testmemcmp();
+void	teststrnstr();
+void	testatoi();
+void	testcalloc();
+void	teststrdup();
+//Additional functions
+void	testsubstr();
+void	teststrjoin();
 
 #endif

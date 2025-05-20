@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:18:23 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 20:47:04 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:39:24 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main()
 {
-	printf("Libc functions:\n");
+	printf("\nLibc functions:\n");
 	testisalpha();
 	testisdigit();
 	testisalnum();
@@ -32,6 +32,15 @@ int	main()
 	teststrchr();
 	teststrrchr();
 	teststrncmp();
-	//testmemchr();
+	testmemchr();
+	testmemcmp();
+	teststrnstr();
+	testatoi();
+	testcalloc();
+	teststrdup();
+	printf("\nAdditional functions:\n");
+	testsubstr();
+	teststrjoin();
+	
 	return 0;
 }

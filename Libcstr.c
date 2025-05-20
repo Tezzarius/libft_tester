@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:00:58 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 21:23:37 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:36:04 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,10 +181,78 @@ void	teststrncmp()
 	if (ft_strncmp("Tab", "Tabula Rasa", 5) < 0)
 		printf(GREEN "[OK] " RESET);
 	else
-		printf(RED "[KO] " RESET);
+		printf(RED "[KO] " RESET); 
 	if (ft_strncmp("atoms\0\0\0\0", "atoms\0abc", 8) == 0)
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
+	printf("\n");
+}
+
+void	teststrnstr()
+{
+	char 	str[] = "Tabula Rasa";
+	char 	*to_find = "sa";
+	char	*to_find2 = "Ras";
+	char	*to_find3 = "la";
+	char	*dest;
+
+	printf("ft_strnstr: ");
+	dest = ft_strnstr(str, to_find, 12);
+	if (tester_strncmp(dest, "sa", 3) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_strnstr(str, to_find2, 12);
+	if (tester_strncmp(dest, "Rasa", 5) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_strnstr(str, to_find3, 6);
+	if (tester_strncmp(dest, "la Rasa", 8) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	dest = ft_strnstr(str, to_find2, 5);
+	if (!dest)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	printf("\n");
+}
+
+void	teststrdup()
+{
+	char	str[20] = "123456789";
+	char	str2[20] = "abcdefghi";
+	char	str3[20] = "ABCDEFGHI";
+	char	str4[20] = "!@#$^&*()";
+	char	*dest;
+
+	printf("ft_strdup:  ");
+	dest = ft_strdup(str);
+	if (tester_strncmp(dest, "123456789", 10) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	free(dest);
+	dest = ft_strdup(str2);
+	if (tester_strncmp(dest, "abcdefghi", 10) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	free(dest);
+	dest = ft_strdup(str3);
+	if (tester_strncmp(dest, "ABCDEFGHI", 10) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	free(dest);
+	dest = ft_strdup(str4);
+	if (tester_strncmp(dest, "!@#$^&*()", 10) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	free(dest);
 	printf("\n");
 }

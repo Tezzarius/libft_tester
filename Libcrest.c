@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:01:22 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/18 20:56:47 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:16:47 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,59 @@ void	testtolower()
 		printf(GREEN "[OK] " RESET);
 	else
 		printf(RED "[KO] " RESET);
+	printf("\n");
+}
+
+void	testatoi()
+{
+	printf("ft_atoi:    ");
+	if (ft_atoi("+345fgh") == 345)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	if (ft_atoi("  -345fgh") == -345)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	if (ft_atoi("++345fgh") == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	if (ft_atoi("--345fgh") == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	printf("\n");
+}
+
+void	testcalloc()
+{
+	char	*ptr;
+
+	printf("ft_calloc:  ");
+	ptr = ft_calloc(5, 5);
+	if (tester_strncmp(ptr, "\0\0\0\0\0", 5) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	free(ptr);
+	ptr = ft_calloc(8, 8);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0", 8) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	free(ptr);
+	ptr = ft_calloc(12, 12);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0", 12) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	free(ptr);
+	ptr = ft_calloc(12, 16);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) == 0)
+		printf(GREEN "[OK] " RESET);
+	else
+		printf(RED "[KO] " RESET);
+	free(ptr);
 	printf("\n");
 }

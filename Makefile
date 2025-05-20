@@ -15,6 +15,7 @@ SRC = 	helperfunctions.c\
 		Libcmem.c\
 		Libcstr.c\
 		Libcrest.c\
+		additional.c\
 
 OBJ = $(SRC:.c=.o)
 
