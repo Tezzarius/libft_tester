@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:18:23 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/20 14:39:24 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:14:02 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ int	main()
 	printf("\nAdditional functions:\n");
 	testsubstr();
 	teststrjoin();
+	teststrtrim();
+	testsplit();
+	testitoa();
+	teststrmapi();
+	teststriteri();
 	
 	return 0;
 }

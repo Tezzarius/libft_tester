@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 11:46:10 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/05/20 17:04:55 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:13:53 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include "../libft.h"
 #include <stdio.h>
+#include <ctype.h>
 
 int	tester_strncmp(const char *s1, const char *s2, size_t n);
 
@@ -49,5 +50,10 @@ void	teststrdup();
 //Additional functions
 void	testsubstr();
 void	teststrjoin();
+void	teststrtrim();
+void	testsplit();
+void	testitoa();
+void	teststrmapi();
+void	teststriteri();
 
 #endif
