@@ -6,7 +6,7 @@
 /*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:18:23 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/10/27 14:45:20 by bschwarz         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:46:04 by bschwarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 #define RED		"\x1b[31m"
 #define GREEN	"\x1b[32m"
 #define RESET	"\x1b[0m"
+
+void	ft_lstadd_back(t_list **lst, t_list *new)__attribute__((weak));
+void	ft_lstadd_front(t_list **lst, t_list *new)__attribute__((weak));
+void	ft_lstclear(t_list **lst, void (*del)(void *))__attribute__((weak));
+void	ft_lstdelone(t_list *lst, void (*del)(void *))__attribute__((weak));
+void	ft_lstiter(t_list *lst, void (*f)(void *))__attribute__((weak));
+t_list	*ft_lstlast(t_list *lst)__attribute__((weak));
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))__attribute__((weak));
+t_list	*ft_lstnew(void *content)__attribute__((weak));
+int		ft_lstsize(t_list *lst)__attribute__((weak));
 
 int	tester_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -1225,78 +1235,104 @@ void my_iter(void *content)
 void	test_lst()
 {
 	t_list	*lst;
-
-	printf("ft_lstnew_fd:   ");
-	lst = ft_lstnew("first");
-	if ((tester_strncmp(lst->content, "first", 6)) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	printf("\nft_lstadd_back: ");
-	ft_lstadd_back(&lst, ft_lstnew("last"));
-	if ((tester_strncmp(lst->next->content, "last", 5)) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	printf("\nft_lstadd_front:");
-	ft_lstadd_front(&lst, ft_lstnew("new first"));
-	if ((tester_strncmp(lst->content, "new first", 10)) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	printf("\nft_lstsize:     ");
-	int size = ft_lstsize(lst);
-	if (size == 3)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	printf("\nft_lstlast:     ");
-	t_list *last = ft_lstlast(lst);
-	if ((tester_strncmp(last->content, "last", 10)) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	printf("\nft_lstdelone:   ");
-	t_list *del_test = ft_lstnew(ft_strdup("del"));
-	if (!del_test)
-		printf(RED "[KO] " RESET);
-	else
+	
+	if (&ft_lstnew)
 	{
-		ft_lstdelone(del_test, free);
-		printf(GREEN "[OK] " RESET);
+
+		printf("ft_lstnew_fd:   ");
+		lst = ft_lstnew("first");
+		if ((tester_strncmp(lst->content, "first", 6)) == 0)
+			printf(GREEN "[OK] " RESET);
+		else
+			printf(RED "[KO] " RESET);
 	}
-	printf("\nft_lstclear:    ");
-	t_list *clear_test = ft_lstnew(ft_strdup("1"));
-	ft_lstadd_back(&clear_test, ft_lstnew(ft_strdup("2")));
-	ft_lstadd_back(&clear_test, ft_lstnew(ft_strdup("3")));
-	ft_lstclear(&clear_test, free);
-	if (clear_test == NULL)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	printf("\nft_lstiter:     ");
-	t_list *iter_test = ft_lstnew(ft_strdup("abc"));
-	ft_lstiter(iter_test, my_iter);
-	if (tester_strncmp(iter_test->content, "ABC", 4) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	ft_lstdelone(iter_test, free);
-	printf("\nft_lstmap:      ");
-	t_list *map_test = ft_lstnew(ft_strdup("111"));
-	ft_lstadd_back(&map_test, ft_lstnew(ft_strdup("222")));
-	t_list *mapped = ft_lstmap(map_test, &my_map, &del_map);
-
-	if (!mapped)
-		printf(RED "[KO] " RESET);
-	else if (tester_strncmp(mapped->content, "11", 3) == 0 &&
-			tester_strncmp(mapped->next->content, "22", 3) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-
-	ft_lstclear(&map_test, del_map);
-	ft_lstclear(&mapped, del_map);
+	if (&ft_lstadd_back)
+	{
+		printf("\nft_lstadd_back: ");
+		ft_lstadd_back(&lst, ft_lstnew("last"));
+		if ((tester_strncmp(lst->next->content, "last", 5)) == 0)
+			printf(GREEN "[OK] " RESET);
+		else
+			printf(RED "[KO] " RESET);
+	}
+	if (&ft_lstadd_front)
+	{
+		printf("\nft_lstadd_front:");
+		ft_lstadd_front(&lst, ft_lstnew("new first"));
+		if ((tester_strncmp(lst->content, "new first", 10)) == 0)
+			printf(GREEN "[OK] " RESET);
+		else
+			printf(RED "[KO] " RESET);
+	}
+	if (&ft_lstsize)
+	{
+		printf("\nft_lstsize:     ");
+		int size = ft_lstsize(lst);
+		if (size == 3)
+			printf(GREEN "[OK] " RESET);
+		else
+			printf(RED "[KO] " RESET);
+	}
+	if (&ft_lstlast)
+	{
+		printf("\nft_lstlast:     ");
+		t_list *last = ft_lstlast(lst);
+		if ((tester_strncmp(last->content, "last", 10)) == 0)
+			printf(GREEN "[OK] " RESET);
+		else
+			printf(RED "[KO] " RESET);
+	}
+	if (&ft_lstdelone)
+	{
+		printf("\nft_lstdelone:   ");
+		t_list *del_test = ft_lstnew(ft_strdup("del"));
+		if (!del_test)
+			printf(RED "[KO] " RESET);
+		else
+		{
+			ft_lstdelone(del_test, free);
+			printf(GREEN "[OK] " RESET);
+		}
+	}
+	if (&ft_lstclear)
+	{
+		printf("\nft_lstclear:    ");
+		t_list *clear_test = ft_lstnew(ft_strdup("1"));
+		ft_lstadd_back(&clear_test, ft_lstnew(ft_strdup("2")));
+		ft_lstadd_back(&clear_test, ft_lstnew(ft_strdup("3")));
+		ft_lstclear(&clear_test, free);
+		if (clear_test == NULL)
+			printf(GREEN "[OK] " RESET);
+		else
+			printf(RED "[KO] " RESET);
+	}
+	if (&ft_lstiter)
+	{
+		printf("\nft_lstiter:     ");
+		t_list *iter_test = ft_lstnew(ft_strdup("abc"));
+		ft_lstiter(iter_test, my_iter);
+		if (tester_strncmp(iter_test->content, "ABC", 4) == 0)
+			printf(GREEN "[OK] " RESET);
+		else
+			printf(RED "[KO] " RESET);
+		ft_lstdelone(iter_test, free);
+	}
+	if (&ft_lstmap)
+	{	
+		printf("\nft_lstmap:      ");
+		t_list *map_test = ft_lstnew(ft_strdup("111"));
+		ft_lstadd_back(&map_test, ft_lstnew(ft_strdup("222")));
+		t_list *mapped = ft_lstmap(map_test, &my_map, &del_map);
+		if (!mapped)
+			printf(RED "[KO] " RESET);
+		else if (tester_strncmp(mapped->content, "11", 3) == 0 &&
+				tester_strncmp(mapped->next->content, "22", 3) == 0)
+			printf(GREEN "[OK] " RESET);
+		else
+			printf(RED "[KO] " RESET);
+		ft_lstclear(&map_test, del_map);
+		ft_lstclear(&mapped, del_map);
+	}
 	printf("\n");
 }
 
