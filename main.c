@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bschwarz <bschwarz@student.42vienna.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 12:18:23 by bschwarz          #+#    #+#             */
-/*   Updated: 2025/10/28 15:34:57 by bschwarz         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 #include <stdio.h>
 #include <ctype.h>
@@ -1244,7 +1232,7 @@ void	test_lst(){
 	printf("\n");
 }
 
-int	main(int ac, char **av){
+int	main(){
 	printf("\nLibc functions:\n");
 	testisalnum();
 	testisalpha();
@@ -1281,10 +1269,7 @@ int	main(int ac, char **av){
 	test_putendl_fd();
 	test_putnbr_fd();
 	test_putstr_fd();
-	if (ac == 2 && !strcmp(av[1], "bonus"))
-	{
-		printf("\nBonus:\n");
-		test_lst();
-	}
+	printf("/nLinked list:/n");
+	test_lst();
 	return 0;
 }
