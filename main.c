@@ -1,281 +1,179 @@
-#include "libft.h"
+#include "./inc/libft.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-
-//cc main.c -Iinc -L. -lft
 
 #define RED		"\x1b[31m"
 #define GREEN	"\x1b[32m"
 #define RESET	"\x1b[0m"
 
+int check = 0;
+
 int tester_strncmp(const char *s1, const char *s2, size_t n) {
 	size_t i;
 
-	if (n == 0)
-		return (0);
+	if (n == 0) return (0);
 	for (i = 0; i < n - 1 && s1[i] && s2[i] && s1[i] == s2[i]; i++);
 	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
-void testisalpha() {
-	int	i = 0;
-	int	check = 0;
+void printResult() {
+	if (check)
+		printf(RED "[KO] " RESET);
+	else
+		printf(GREEN "[OK] " RESET);
+	check = 0;
+}
+
+void isAlpha() {
+	int	i;
 
 	printf("ft_isalpha:   ");
-	while (i < 65) {
-		if (ft_isalpha(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 91) {
-		if (ft_isalpha(i) == 0)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 97) {
-		if (ft_isalpha(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 123) {
-		if (ft_isalpha(i) == 0)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+
+	for (i = 0; i < 65; i++)
+		if (ft_isalpha(i)) check = 1;
+	printResult();
+
+	for (; i < 91; i++)
+		if (!ft_isalpha(i))	check = 1;
+	printResult();
+
+	for (; i < 97; i++)
+		if (ft_isalpha(i))	check = 1;
+	printResult();
+
+	for (; i < 123; i++)
+		if (!ft_isalpha(i))	check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testisdigit() {
-	int	i = 0;
-	int	check = 0;
+void isDigit() {
+	int	i;
 
 	printf("ft_isdigit:   ");
-	while (i < 48) {
-		if (ft_isdigit(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 58) {
-		if (ft_isdigit(i) == 0)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 128) {
-		if (ft_isdigit(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	for (i = 0; i < 48; i++)
+		if (ft_isdigit(i))	check = 1;
+	printResult();
+
+	for (; i < 58; i++)
+		if (!ft_isdigit(i))	check = 1;
+	printResult();
+
+	for (; i < 128; i++)
+		if (ft_isdigit(i))	check = 1;
+	printResult();
 	printf("\n");
 }
 
-void testisalnum() {
+void isAlnum() {
 	int	i = 0;
-	int	check = 0;
 
 	printf("ft_isalnum:   ");
-	while (i < 48) {
-		if (ft_isalnum(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 58) {
-		if (ft_isalnum(i) == 0)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 65) {
-		if (ft_isalnum(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 91) {
-		if (ft_isalnum(i) == 0)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 97) {
-		if (ft_isalnum(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 123) {
-		if (ft_isalnum(i) == 0)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	for (; i < 48; i++)
+		if (ft_isalnum(i))	check = 1;
+	printResult();
+
+	for (; i < 58; i++)
+		if (!ft_isalnum(i))	check = 1;
+	printResult();
+
+	for (; i < 65; i++)
+		if (ft_isalnum(i))	check = 1;
+	printResult();
+
+	for (; i < 91; i++)
+		if (!ft_isalnum(i))	check = 1;
+	printResult();
+
+	for (; i < 97; i++)
+		if (ft_isalnum(i))	check = 1;
+	printResult();
+
+	for (; i < 123; i++)
+		if (!ft_isalnum(i))	check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testisascii() {
-	int	i = -1;
-	int	check = 0;
+void isAscii() {
+	int	i;
 
 	printf("ft_isascii:   ");
-	while (++i < 128)
-		if (ft_isascii(i) == 0)
-			check = 1;
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (ft_isascii(-1)) check = 1;
+	printResult();
+
+	for (i = 0; i < 128; i++)
+		if (!ft_isascii(i)) check = 1;
+	printResult();
+
+	if (ft_isascii(128)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testisprint() {
-	int	i = 0;
-	int	check = 0;
+void isPrint() {
+	int	i;
 
 	printf("ft_isprint:   ");
-	while (i < 32) {
-		if (ft_isprint(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 127) {
-		if (ft_isprint(i) == 0)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	check = 0;
-	while (i < 128) {
-		if (ft_isprint(i) == 1)
-			check = 1;
-		i++;
-	}
-	if(check == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	for (i = 0; i < 32; i++)
+		if (ft_isprint(i))	check = 1;
+	printResult();
+	
+	for (; i < 127; i++)
+		if (!ft_isprint(i)) check = 1;
+	printResult();
+
+	if (ft_isprint(127)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testmemset() {
+void memSet() {
 	char	str[20] = "test me if you can";
 
 	printf("ft_memset:    ");
 	ft_memset(str, '*', 5);
-	if (tester_strncmp(str, "*****", 5) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "*****", 5)) check = 1;
+	printResult();
+
 	ft_memset(str, '$', 8);
-	if (tester_strncmp(str, "$$$$$$$$", 8) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "$$$$$$$$", 8)) check = 1;
+	printResult();
+
 	ft_memset(str, '#', 12);
-	if (tester_strncmp(str, "############", 12) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "############", 12)) check = 1;
+	printResult();
+
 	ft_memset(str, '\0', 16);
-	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testmemcpy() {
+void memCpy() {
 	char	dest[20] = " ";
 
 	printf("ft_memcpy:    ");
 	ft_memcpy(dest, "Tabula Rasa", 7);
-	if (tester_strncmp(dest, "Tabula", 7))
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (!tester_strncmp(dest, "Tabula", 7)) check = 1;
+	printResult();
+
 	ft_memcpy(dest, "\n\t\tgvertge\n\t", 10);
-	if (tester_strncmp(dest, "\n\t\tgvertg", 10))
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (!tester_strncmp(dest, "\n\t\tgvertg", 10)) check = 1;
+	printResult();
+
 	ft_memcpy(dest, "Just try it for fun", 12);
-	if (tester_strncmp(dest, "Just try it", 12))
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (!tester_strncmp(dest, "Just try it", 12)) check = 1;
+	printResult();
+
 	ft_memcpy(dest, "aerfgregrhrhrhrht", 16);
-	if (tester_strncmp(dest, "aerfgregrhrhrhr", 16))
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (!tester_strncmp(dest, "aerfgregrhrhrhr", 16)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testmemmove() {
+void memMove() {
 	char	str[20] = "123456789";
 	char	str2[20] = "123456789";
 	char	str3[20] = "123456789";
@@ -284,29 +182,24 @@ void	testmemmove() {
 
 	printf("ft_memmove:   ");
 	ft_memmove(str + 1, str + 3, 5);
-	if (tester_strncmp(str, "145678789", 10) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "145678789", 10)) check = 1;
+	printResult();
+
 	ft_memmove(str2 + 3, str2 + 1, 5);
-	if (tester_strncmp(str2, "123234569", 10) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str2, "123234569", 10)) check = 1;
+	printResult();
+
 	ft_memmove(dest, str3, 5);
-	if (tester_strncmp(dest, "12345", 6) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "12345", 6)) check = 1;
+	printResult();
+
 	ft_memmove(str4, str4, 5);
-	if (tester_strncmp(str4, "123456789", 10) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str4, "123456789", 10)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testmemchr() {
+void memChr() {
 	char 	str[] = "Tabula Rasa";
 	char 	to_find = 'l';
 	char	to_find2 = 'u';
@@ -316,199 +209,156 @@ void	testmemchr() {
 
 	printf("ft_memchr:    ");
 	dest = ft_memchr(str, to_find, 4);
-	if (!dest)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (dest) check = 1;
+	printResult();
+
 	dest = ft_memchr(str, to_find2, 4);
-	if (tester_strncmp(dest, "ula Rasa", 9) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "ula Rasa", 9)) check = 1;
+	printResult();
+
 	dest = ft_memchr(str, to_find3, 3);
-	if (tester_strncmp(dest, "bula Rasa", 10) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "bula Rasa", 10)) check = 1;
+	printResult();
+
 	dest = ft_memchr(str, to_find4, 6);
-	if (tester_strncmp(dest, "abula Rasa", 11) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "abula Rasa", 11)) check = 1;
+	printResult();
+
 	printf("\n");
 }
 
-void	testmemcmp() {
+void memCmp() {
 	printf("ft_memcmp:    ");
-	if (ft_memcmp("Tabula Rasa", "Tabula Rasa", 5) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_memcmp("Tabula Rasa", "TabuLa Rasa", 5) > 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_memcmp("Tabula Rasa", "Tabuda Rasa", 5) > 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_memcmp("Tab", "Tabula Rasa", 5) < 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_memcmp("atoms\0\0\0\0", "atoms\0abc", 8) < 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (ft_memcmp("Tabula Rasa", "Tabula Rasa", 5)) check = 1;
+	printResult();
+
+	if (ft_memcmp("Tabula Rasa", "TabuLa Rasa", 5) <= 0) check = 1;
+	printResult();
+
+	if (ft_memcmp("Tabula Rasa", "Tabuda Rasa", 5) <= 0) check = 1;
+	printResult();
+
+	if (ft_memcmp("Tab", "Tabula Rasa", 5) >= 0) check = 1;
+	printResult();
+
+	if (ft_memcmp("atoms\0\0\0\0", "atoms\0abc", 8) >= 0) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testbzero() {
+void bZero() {
 	char	str[20] = "test me if you can";
 
 	printf("ft_bzero:     ");
 	ft_bzero(str, 5);
-	if (tester_strncmp(str, "\0\0\0\0\0", 5) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "\0\0\0\0\0", 5)) check = 1;
+	printResult();
+
 	ft_bzero(str, 8);
-	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0", 8) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0", 8)) check = 1;
+	printResult();
+
 	ft_bzero(str, 12);
-	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0", 12) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0", 12)) check = 1;
+	printResult();
+
 	ft_bzero(str, 16);
-	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testtoupper() {
+void toUpper() {
 	printf("ft_toupper:   ");
-	if (ft_toupper('9') == '9')
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_toupper('G') == 'G')
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_toupper('$') == '$')
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_toupper('t') == 'T')
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (ft_toupper('9') != '9') check = 1;
+	printResult();
+
+	if (ft_toupper('G') != 'G') check = 1;
+	printResult();
+
+	if (ft_toupper('$') != '$') check = 1;
+	printResult();
+
+	if (ft_toupper('t') != 'T') check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testtolower() {
+void toLower() {
 	printf("ft_tolower:   ");
-	if (ft_tolower('9') == '9')
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_tolower('G') == 'g')
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_tolower('$') == '$')
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_tolower('t') == 't')
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (ft_tolower('9') != '9') check = 1;
+	printResult();
+
+	if (ft_tolower('G') != 'g') check = 1;
+	printResult();
+
+	if (ft_tolower('$') != '$') check = 1;
+	printResult();
+
+	if (ft_tolower('t') != 't') check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testatoi() {
+void aToI() {
 	printf("ft_atoi:      ");
-	if (ft_atoi("+345fgh") == 345)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_atoi("  -345fgh") == -345)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_atoi("++345fgh") == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_atoi("--345fgh") == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (ft_atoi("+345fgh") != 345) check = 1;
+	printResult();
+
+	if (ft_atoi("  -345fgh") != -345) check = 1;
+	printResult();
+
+	if (ft_atoi("++345fgh") != 0) check = 1;
+	printResult();
+
+	if (ft_atoi("--345fgh") != 0) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	testcalloc() {
+void Calloc() {
 	char	*ptr;
 
 	printf("ft_calloc:    ");
 	ptr = ft_calloc(5, 5);
-	if (tester_strncmp(ptr, "\0\0\0\0\0", 5) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(ptr, "\0\0\0\0\0", 5) != 0) check = 1;
+	printResult();
 	free(ptr);
+
 	ptr = ft_calloc(8, 8);
-	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0", 8) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0", 8) != 0) check = 1;
+	printResult();
 	free(ptr);
+
 	ptr = ft_calloc(12, 12);
-	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0", 12) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0", 12) != 0) check = 1;
+	printResult();
 	free(ptr);
+
 	ptr = ft_calloc(12, 16);
-	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) != 0) check = 1;
+	printResult();
 	free(ptr);
 	printf("\n");
 }
 
-void	teststrlen() {
-	char	*c;
-
-	c = "1";
+void strLen() {
 	printf("ft_strlen:    ");
-	if(ft_strlen("Tabula Rasa") == 11)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if(ft_strlen("@#$^\t^&*\n") == 9)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if(ft_strlen("") == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if(ft_strlen("     ") == 5)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if(ft_strlen("Tabula Rasa") != 11) check = 1;
+	printResult();
+
+	if(ft_strlen("@#$^\t^&*\n") != 9) check = 1;
+	printResult();
+
+	if(ft_strlen("") != 0) check = 1;
+	printResult();
+
+	if(ft_strlen("     ") != 5) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	teststrlcpy() {
+void strLCpy() {
 	char	str[20] = "123456789";
 	char	str2[20] = "abcdefghi";
 	char	str3[20] = "ABCDEFGHI";
@@ -517,56 +367,46 @@ void	teststrlcpy() {
 
 	printf("ft_strlcpy:   ");
 	ft_strlcpy(dest, str, 3);
-	if (tester_strncmp(dest, "12", 3) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "12", 3)) check = 1;
+	printResult();
+
 	ft_strlcpy(dest, str2, 5);
-	if (tester_strncmp(dest, "abcd", 5) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "abcd", 5)) check = 1;
+	printResult();
+
 	ft_strlcpy(dest, str3, 7);
-	if (tester_strncmp(dest, "ABCDEF", 7) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "ABCDEF", 7)) check = 1;
+	printResult();
+
 	ft_strlcpy(dest, str4, 9);
-	if (tester_strncmp(dest, "!@#$^&*(", 9) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "!@#$^&*(", 9)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	teststrlcat() {
+void strLCat() {
 	char str[20] = "i ";
 
 	printf("ft_strlcat:   ");
 	ft_strlcat(str, "don't know what i should write....", 5);
-	if (tester_strncmp(str, "i don't know what", 6))
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (!tester_strncmp(str, "i don't know what", 6)) check = 1;
+	printResult();
+
 	ft_strlcat(str, " know what i should write....", 5);
-	if (tester_strncmp(str, "i don't know what", 11))
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (!tester_strncmp(str, "i don't know what", 11)) check = 1;
+	printResult();
+
 	ft_strlcat(str, " what i should write....", 5);
-	if (tester_strncmp(str, "i don't know what", 16))
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (!tester_strncmp(str, "i don't know what", 16)) check = 1;
+	printResult();
+
 	ft_strlcat(str, " i should write....", 5);
-	if (tester_strncmp(str, "i don't know what i should", 21))
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (!tester_strncmp(str, "i don't know what i should", 21)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	teststrchr() {
+void strChr() {
 	char 	str[] = "Tabula Rasa";
 	char 	to_find = 'l';
 	char	to_find2 = 'u';
@@ -576,29 +416,24 @@ void	teststrchr() {
 
 	printf("ft_strchr:    ");
 	dest = ft_strchr(str, to_find);
-	if (tester_strncmp(dest, "la Rasa", 8) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "la Rasa", 8)) check = 1;
+	printResult();
+
 	dest = ft_strchr(str, to_find2);
-	if (tester_strncmp(dest, "ula Rasa", 9) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "ula Rasa", 9)) check = 1;
+	printResult();
+
 	dest = ft_strchr(str, to_find3);
-	if (tester_strncmp(dest, "bula Rasa", 10) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "bula Rasa", 10)) check = 1;
+	printResult();
+
 	dest = ft_strchr(str, to_find4);
-	if (tester_strncmp(dest, "abula Rasa", 11) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "abula Rasa", 11)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	teststrrchr() {
+void strRChr() {
 	char 	str[] = "Tabula Rasa";
 	char 	to_find = 's';
 	char	to_find2 = 'R';
@@ -608,54 +443,43 @@ void	teststrrchr() {
 
 	printf("ft_strrchr:   ");
 	dest = ft_strrchr(str, to_find);
-	if (tester_strncmp(dest, "sa", 3) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "sa", 3)) check = 1;
+	printResult();
+
 	dest = ft_strrchr(str, to_find2);
-	if (tester_strncmp(dest, "Rasa", 5) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "Rasa", 5)) check = 1;
+	printResult();
+
 	dest = ft_strrchr(str, to_find3);
-	if (tester_strncmp(dest, "la Rasa", 8) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "la Rasa", 8)) check = 1;
+	printResult();
+
 	dest = ft_strrchr(str, to_find4);
-	if (tester_strncmp(dest, "bula Rasa", 10) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "bula Rasa", 10)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	teststrncmp() {
-	printf("ft_strcmp:    ");
-	if (ft_strncmp("Tabula Rasa", "Tabula Rasa", 5) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_strncmp("Tabula Rasa", "TabuLa Rasa", 5) > 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_strncmp("Tabula Rasa", "Tabuda Rasa", 5) > 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
-	if (ft_strncmp("Tab", "Tabula Rasa", 5) < 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET); 
-	if (ft_strncmp("atoms\0\0\0\0", "atoms\0abc", 8) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+void strNCmp() {
+	printf("ft_strncmp:   ");
+	if (ft_strncmp("Tabula Rasa", "Tabula Rasa", 5)) check = 1;
+	printResult();
+
+	if (ft_strncmp("Tabula Rasa", "TabuLa Rasa", 5) <= 0) check = 1;
+	printResult();
+
+	if (ft_strncmp("Tabula Rasa", "Tabuda Rasa", 5) <= 0) check = 1;
+	printResult();
+
+	if (ft_strncmp("Tab", "Tabula Rasa", 5) >= 0) check = 1;
+	printResult();
+
+	if (ft_strncmp("atoms\0\0\0\0", "atoms\0abc", 8)) check = 1;
+	printResult();
 	printf("\n");
 }
 
-void	teststrnstr() {
+void strNStr() {
 	char 	str[] = "Tabula Rasa";
 	char 	*to_find = "sa";
 	char	*to_find2 = "Ras";
@@ -664,25 +488,20 @@ void	teststrnstr() {
 
 	printf("ft_strnstr:   ");
 	dest = ft_strnstr(str, to_find, 12);
-	if (tester_strncmp(dest, "sa", 3) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "sa", 3)) check = 1;
+	printResult();
+
 	dest = ft_strnstr(str, to_find2, 12);
-	if (tester_strncmp(dest, "Rasa", 5) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "Rasa", 5)) check = 1;
+	printResult();
+
 	dest = ft_strnstr(str, to_find3, 6);
-	if (tester_strncmp(dest, "la Rasa", 8) == 0)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (tester_strncmp(dest, "la Rasa", 8)) check = 1;
+	printResult();
+
 	dest = ft_strnstr(str, to_find2, 5);
-	if (!dest)
-		printf(GREEN "[OK] " RESET);
-	else
-		printf(RED "[KO] " RESET);
+	if (dest) check = 1;
+	printResult();
 	printf("\n");
 }
 
@@ -1218,29 +1037,29 @@ void	test_lst() {
 
 int	main() {
 	printf("\nLibc functions:\n");
-	testisalnum();
-	testisalpha();
-	testisascii();
-	testisdigit();
-	testisprint();
-	testtolower();
-	testtoupper();
-	testatoi();
-	testbzero();
-	testcalloc();
-	testmemchr();
-	testmemcmp();
-	testmemcpy();
-	testmemmove();
-	testmemset();
-	teststrchr();
+	isAlnum();
+	isAlpha();
+	isAscii();
+	isDigit();
+	isPrint();
+	toLower();
+	toUpper();
+	aToI();
+	bZero();
+	Calloc();
+	memChr();
+	memCmp();
+	memCpy();
+	memMove();
+	memSet();
+	strChr();
 	teststrdup();
-	teststrlcat();
-	teststrlcpy();
-	teststrlen();
-	teststrncmp();
-	teststrnstr();
-	teststrrchr();
+	strLCat();
+	strLCpy();
+	strLen();
+	strNCmp();
+	strNStr();
+	strRChr();
 	printf("\nAdditional functions:\n");
 	testitoa();
 	testsplit();
