@@ -3,27 +3,27 @@
 #include <ctype.h>
 #include <string.h>
 
+//cc main.c -Iinc -L. -lft
+
 #define RED		"\x1b[31m"
 #define GREEN	"\x1b[32m"
 #define RESET	"\x1b[0m"
 
-int	tester_strncmp(const char *s1, const char *s2, size_t n){
-	size_t	i = 0;
+int tester_strncmp(const char *s1, const char *s2, size_t n) {
+	size_t i;
 
 	if (n == 0)
 		return (0);
-	while (i < n - 1 && s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
+	for (i = 0; i < n - 1 && s1[i] && s2[i] && s1[i] == s2[i]; i++);
 	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
-void	testisalpha(){
+void testisalpha() {
 	int	i = 0;
 	int	check = 0;
 
 	printf("ft_isalpha:   ");
-	while (i < 65)
-	{
+	while (i < 65) {
 		if (ft_isalpha(i) == 1)
 			check = 1;
 		i++;
@@ -33,8 +33,7 @@ void	testisalpha(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 91)
-	{
+	while (i < 91) {
 		if (ft_isalpha(i) == 0)
 			check = 1;
 		i++;
@@ -44,8 +43,7 @@ void	testisalpha(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 97)
-	{
+	while (i < 97) {
 		if (ft_isalpha(i) == 1)
 			check = 1;
 		i++;
@@ -55,8 +53,7 @@ void	testisalpha(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 123)
-	{
+	while (i < 123) {
 		if (ft_isalpha(i) == 0)
 			check = 1;
 		i++;
@@ -68,13 +65,12 @@ void	testisalpha(){
 	printf("\n");
 }
 
-void	testisdigit(){
+void	testisdigit() {
 	int	i = 0;
 	int	check = 0;
 
 	printf("ft_isdigit:   ");
-	while (i < 48)
-	{
+	while (i < 48) {
 		if (ft_isdigit(i) == 1)
 			check = 1;
 		i++;
@@ -84,8 +80,7 @@ void	testisdigit(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 58)
-	{
+	while (i < 58) {
 		if (ft_isdigit(i) == 0)
 			check = 1;
 		i++;
@@ -95,8 +90,7 @@ void	testisdigit(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 128)
-	{
+	while (i < 128) {
 		if (ft_isdigit(i) == 1)
 			check = 1;
 		i++;
@@ -108,13 +102,12 @@ void	testisdigit(){
 	printf("\n");
 }
 
-void	testisalnum(){
+void testisalnum() {
 	int	i = 0;
 	int	check = 0;
 
 	printf("ft_isalnum:   ");
-	while (i < 48)
-	{
+	while (i < 48) {
 		if (ft_isalnum(i) == 1)
 			check = 1;
 		i++;
@@ -124,8 +117,7 @@ void	testisalnum(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 58)
-	{
+	while (i < 58) {
 		if (ft_isalnum(i) == 0)
 			check = 1;
 		i++;
@@ -135,8 +127,7 @@ void	testisalnum(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 65)
-	{
+	while (i < 65) {
 		if (ft_isalnum(i) == 1)
 			check = 1;
 		i++;
@@ -146,8 +137,7 @@ void	testisalnum(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 91)
-	{
+	while (i < 91) {
 		if (ft_isalnum(i) == 0)
 			check = 1;
 		i++;
@@ -157,8 +147,7 @@ void	testisalnum(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 97)
-	{
+	while (i < 97) {
 		if (ft_isalnum(i) == 1)
 			check = 1;
 		i++;
@@ -168,8 +157,7 @@ void	testisalnum(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 123)
-	{
+	while (i < 123) {
 		if (ft_isalnum(i) == 0)
 			check = 1;
 		i++;
@@ -181,7 +169,7 @@ void	testisalnum(){
 	printf("\n");
 }
 
-void	testisascii(){
+void	testisascii() {
 	int	i = -1;
 	int	check = 0;
 
@@ -196,13 +184,12 @@ void	testisascii(){
 	printf("\n");
 }
 
-void	testisprint(){
+void	testisprint() {
 	int	i = 0;
 	int	check = 0;
 
 	printf("ft_isprint:   ");
-	while (i < 32)
-	{
+	while (i < 32) {
 		if (ft_isprint(i) == 1)
 			check = 1;
 		i++;
@@ -212,8 +199,7 @@ void	testisprint(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 127)
-	{
+	while (i < 127) {
 		if (ft_isprint(i) == 0)
 			check = 1;
 		i++;
@@ -223,8 +209,7 @@ void	testisprint(){
 	else
 		printf(RED "[KO] " RESET);
 	check = 0;
-	while (i < 128)
-	{
+	while (i < 128) {
 		if (ft_isprint(i) == 1)
 			check = 1;
 		i++;
@@ -236,7 +221,7 @@ void	testisprint(){
 	printf("\n");
 }
 
-void	testmemset(){
+void	testmemset() {
 	char	str[20] = "test me if you can";
 
 	printf("ft_memset:    ");
@@ -263,7 +248,7 @@ void	testmemset(){
 	printf("\n");
 }
 
-void	testmemcpy(){
+void	testmemcpy() {
 	char	dest[20] = " ";
 
 	printf("ft_memcpy:    ");
@@ -290,7 +275,7 @@ void	testmemcpy(){
 	printf("\n");
 }
 
-void	testmemmove(){
+void	testmemmove() {
 	char	str[20] = "123456789";
 	char	str2[20] = "123456789";
 	char	str3[20] = "123456789";
@@ -321,7 +306,7 @@ void	testmemmove(){
 	printf("\n");
 }
 
-void	testmemchr(){
+void	testmemchr() {
 	char 	str[] = "Tabula Rasa";
 	char 	to_find = 'l';
 	char	to_find2 = 'u';
@@ -353,7 +338,7 @@ void	testmemchr(){
 	printf("\n");
 }
 
-void	testmemcmp(){
+void	testmemcmp() {
 	printf("ft_memcmp:    ");
 	if (ft_memcmp("Tabula Rasa", "Tabula Rasa", 5) == 0)
 		printf(GREEN "[OK] " RESET);
@@ -378,7 +363,7 @@ void	testmemcmp(){
 	printf("\n");
 }
 
-void	testbzero(){
+void	testbzero() {
 	char	str[20] = "test me if you can";
 
 	printf("ft_bzero:     ");
@@ -405,7 +390,7 @@ void	testbzero(){
 	printf("\n");
 }
 
-void	testtoupper(){
+void	testtoupper() {
 	printf("ft_toupper:   ");
 	if (ft_toupper('9') == '9')
 		printf(GREEN "[OK] " RESET);
@@ -426,7 +411,7 @@ void	testtoupper(){
 	printf("\n");
 }
 
-void	testtolower(){
+void	testtolower() {
 	printf("ft_tolower:   ");
 	if (ft_tolower('9') == '9')
 		printf(GREEN "[OK] " RESET);
@@ -447,7 +432,7 @@ void	testtolower(){
 	printf("\n");
 }
 
-void	testatoi(){
+void	testatoi() {
 	printf("ft_atoi:      ");
 	if (ft_atoi("+345fgh") == 345)
 		printf(GREEN "[OK] " RESET);
@@ -468,7 +453,7 @@ void	testatoi(){
 	printf("\n");
 }
 
-void	testcalloc(){
+void	testcalloc() {
 	char	*ptr;
 
 	printf("ft_calloc:    ");
@@ -499,7 +484,7 @@ void	testcalloc(){
 	printf("\n");
 }
 
-void	teststrlen(){
+void	teststrlen() {
 	char	*c;
 
 	c = "1";
@@ -523,7 +508,7 @@ void	teststrlen(){
 	printf("\n");
 }
 
-void	teststrlcpy(){
+void	teststrlcpy() {
 	char	str[20] = "123456789";
 	char	str2[20] = "abcdefghi";
 	char	str3[20] = "ABCDEFGHI";
@@ -554,7 +539,7 @@ void	teststrlcpy(){
 	printf("\n");
 }
 
-void	teststrlcat(){
+void	teststrlcat() {
 	char str[20] = "i ";
 
 	printf("ft_strlcat:   ");
@@ -581,7 +566,7 @@ void	teststrlcat(){
 	printf("\n");
 }
 
-void	teststrchr(){
+void	teststrchr() {
 	char 	str[] = "Tabula Rasa";
 	char 	to_find = 'l';
 	char	to_find2 = 'u';
@@ -613,7 +598,7 @@ void	teststrchr(){
 	printf("\n");
 }
 
-void	teststrrchr(){
+void	teststrrchr() {
 	char 	str[] = "Tabula Rasa";
 	char 	to_find = 's';
 	char	to_find2 = 'R';
@@ -645,7 +630,7 @@ void	teststrrchr(){
 	printf("\n");
 }
 
-void	teststrncmp(){
+void	teststrncmp() {
 	printf("ft_strcmp:    ");
 	if (ft_strncmp("Tabula Rasa", "Tabula Rasa", 5) == 0)
 		printf(GREEN "[OK] " RESET);
@@ -670,7 +655,7 @@ void	teststrncmp(){
 	printf("\n");
 }
 
-void	teststrnstr(){
+void	teststrnstr() {
 	char 	str[] = "Tabula Rasa";
 	char 	*to_find = "sa";
 	char	*to_find2 = "Ras";
@@ -701,7 +686,7 @@ void	teststrnstr(){
 	printf("\n");
 }
 
-void	teststrdup(){
+void	teststrdup() {
 	char	str[20] = "123456789";
 	char	str2[20] = "abcdefghi";
 	char	str3[20] = "ABCDEFGHI";
@@ -736,7 +721,7 @@ void	teststrdup(){
 	printf("\n");
 }
 
-void	testsubstr(){
+void	testsubstr() {
 	char	*str = "get this part of the string";
 	char	*str2 = NULL;
 	char	*dest;
@@ -769,7 +754,7 @@ void	testsubstr(){
 	printf("\n");
 }
 
-void	teststrjoin(){
+void	teststrjoin() {
 	char	*str = "I ";
 	char	*str2 = NULL;
 	char	*dest;
@@ -804,7 +789,7 @@ void	teststrjoin(){
 	printf("\n");
 }
 
-void	teststrtrim(){
+void	teststrtrim() {
 	char	*str = "  \t \t \n   \n\n\n\t";
 	char	*str2 = "  \t \t \n Hello \t  Please\n Trim me ! \n\n\n\t";
 	char	*str3 = " Just for tests ";
@@ -841,7 +826,7 @@ void	teststrtrim(){
 	printf("\n");
 }
 
-void	testsplit(){
+void	testsplit() {
 	char *s = "Hello World i'm a string";
 	char **t = ft_split(s, ' ');
 	char **dest = ft_split(NULL, ' ');
@@ -878,7 +863,7 @@ void	testsplit(){
 	printf("\n");
 }
 
-void	testitoa(){
+void	testitoa() {
 	char	*dest;
 	
 	printf("ft_itoa:      ");
@@ -909,14 +894,14 @@ void	testitoa(){
 	printf("\n");
 }
 
-static char mapitest(unsigned int i, char c){
+static char mapitest(unsigned int i, char c) {
 	if (i % 2 == 0)
 		return toupper(c);
 	else
 		return tolower(c);
 }
 
-void	teststrmapi(){
+void	teststrmapi() {
 	char	*src = NULL;
 	char	*dest;
 	
@@ -948,7 +933,7 @@ void	teststrmapi(){
 	printf("\n");
 }
 
-void iteritest(unsigned int i, char *c){
+void iteritest(unsigned int i, char *c) {
 	if (i % 2 == 0 && c)
 		*c = toupper(*c);
 }
@@ -983,7 +968,7 @@ void	teststriteri(){
 	printf("\n");
 }
 
-void test_putchar_fd(){
+void test_putchar_fd() {
 	int		fd[2];
 	int		end;
 	char	c[1];
@@ -1022,7 +1007,7 @@ void test_putchar_fd(){
 	printf("\n");
 }
 
-void test_putendl_fd(){
+void test_putendl_fd() {
 	int		fd[2];
 	int		end;
 	char	c[20];
@@ -1061,7 +1046,7 @@ void test_putendl_fd(){
 	printf("\n");
 }
 
-void test_putstr_fd(){
+void test_putstr_fd() {
 	int		fd[2];
 	int		end;
 	char	c[20];
@@ -1100,7 +1085,7 @@ void test_putstr_fd(){
 	printf("\n");
 }
 
-void test_putnbr_fd(){
+void test_putnbr_fd() {
 	int		fd[2];
 	int		end;
 	char	c[5];
@@ -1139,15 +1124,15 @@ void test_putnbr_fd(){
 	printf("\n");
 }
 
-void *my_map(void *content){
+void *my_map(void *content) {
 	return ft_strdup(content + 1); // Entfernt erstes Zeichen
 }
 
-void del_map(void *content){
+void del_map(void *content) {
 	free(content);
 }
 
-void my_iter(void *content){
+void my_iter(void *content) {
 	char *str = (char *)content;
 	while (*str)
 	{
@@ -1157,7 +1142,7 @@ void my_iter(void *content){
 	}
 }
 
-void	test_lst(){
+void	test_lst() {
 	t_list	*lst;
 	
 	printf("ft_lstnew_fd:   ");
@@ -1194,8 +1179,7 @@ void	test_lst(){
 	t_list *del_test = ft_lstnew(ft_strdup("del"));
 	if (!del_test)
 		printf(RED "[KO] " RESET);
-	else
-	{
+	else {
 		ft_lstdelone(del_test, free);
 		printf(GREEN "[OK] " RESET);
 	}
@@ -1232,7 +1216,7 @@ void	test_lst(){
 	printf("\n");
 }
 
-int	main(){
+int	main() {
 	printf("\nLibc functions:\n");
 	testisalnum();
 	testisalpha();
