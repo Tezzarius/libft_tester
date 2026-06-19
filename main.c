@@ -9,15 +9,34 @@
 
 int check = 0;
 
-int tester_strncmp(const char *s1, const char *s2, size_t n) {
-	size_t i;
+// Utility functions
 
-	if (n == 0) return (0);
-	for (i = 0; i < n - 1 && s1[i] && s2[i] && s1[i] == s2[i]; i++);
-	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+static void del_map(void *content) {
+	free(content);
 }
 
-void printResult() {
+static char mapitest(unsigned int i, char c) {
+	if (i % 2 == 0)
+		return toupper(c);
+	else
+		return tolower(c);
+}
+
+static void my_iter(void *content) {
+	char *str = (char *)content;
+	while (*str)
+	{
+		if (*str >= 'a' && *str <= 'z')
+			*str -= 32;
+		str++;
+	}
+}
+
+static void *my_map(void *content) {
+	return ft_strdup(content + 1); // remove first char
+}
+
+static void printResult() {
 	if (check)
 		printf(RED "[KO] " RESET);
 	else
@@ -25,46 +44,15 @@ void printResult() {
 	check = 0;
 }
 
-void isAlpha() {
-	int	i;
+static int tester_strncmp(const char *s1, const char *s2, size_t n) {
+	size_t i;
 
-	printf("ft_isalpha:   ");
-
-	for (i = 0; i < 65; i++)
-		if (ft_isalpha(i)) check = 1;
-	printResult();
-
-	for (; i < 91; i++)
-		if (!ft_isalpha(i))	check = 1;
-	printResult();
-
-	for (; i < 97; i++)
-		if (ft_isalpha(i))	check = 1;
-	printResult();
-
-	for (; i < 123; i++)
-		if (!ft_isalpha(i))	check = 1;
-	printResult();
-	printf("\n");
+	if (n == 0) return (0);
+	for (i = 0; i < n - 1 && s1[i] && s2[i] && s1[i] == s2[i]; i++);
+	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
-void isDigit() {
-	int	i;
-
-	printf("ft_isdigit:   ");
-	for (i = 0; i < 48; i++)
-		if (ft_isdigit(i))	check = 1;
-	printResult();
-
-	for (; i < 58; i++)
-		if (!ft_isdigit(i))	check = 1;
-	printResult();
-
-	for (; i < 128; i++)
-		if (ft_isdigit(i))	check = 1;
-	printResult();
-	printf("\n");
-}
+// Libc functions
 
 void isAlnum() {
 	int	i = 0;
@@ -96,6 +84,29 @@ void isAlnum() {
 	printf("\n");
 }
 
+void isAlpha() {
+	int	i;
+
+	printf("ft_isalpha:   ");
+
+	for (i = 0; i < 65; i++)
+		if (ft_isalpha(i)) check = 1;
+	printResult();
+
+	for (; i < 91; i++)
+		if (!ft_isalpha(i))	check = 1;
+	printResult();
+
+	for (; i < 97; i++)
+		if (ft_isalpha(i))	check = 1;
+	printResult();
+
+	for (; i < 123; i++)
+		if (!ft_isalpha(i))	check = 1;
+	printResult();
+	printf("\n");
+}
+
 void isAscii() {
 	int	i;
 
@@ -108,6 +119,24 @@ void isAscii() {
 	printResult();
 
 	if (ft_isascii(128)) check = 1;
+	printResult();
+	printf("\n");
+}
+
+void isDigit() {
+	int	i;
+
+	printf("ft_isdigit:   ");
+	for (i = 0; i < 48; i++)
+		if (ft_isdigit(i))	check = 1;
+	printResult();
+
+	for (; i < 58; i++)
+		if (!ft_isdigit(i))	check = 1;
+	printResult();
+
+	for (; i < 128; i++)
+		if (ft_isdigit(i))	check = 1;
 	printResult();
 	printf("\n");
 }
@@ -129,24 +158,145 @@ void isPrint() {
 	printf("\n");
 }
 
-void memSet() {
+void toLower() {
+	printf("ft_tolower:   ");
+	if (ft_tolower('9') != '9') check = 1;
+	printResult();
+
+	if (ft_tolower('G') != 'g') check = 1;
+	printResult();
+
+	if (ft_tolower('$') != '$') check = 1;
+	printResult();
+
+	if (ft_tolower('t') != 't') check = 1;
+	printResult();
+	printf("\n");
+}
+
+void toUpper() {
+	printf("ft_toupper:   ");
+	if (ft_toupper('9') != '9') check = 1;
+	printResult();
+
+	if (ft_toupper('G') != 'G') check = 1;
+	printResult();
+
+	if (ft_toupper('$') != '$') check = 1;
+	printResult();
+
+	if (ft_toupper('t') != 'T') check = 1;
+	printResult();
+	printf("\n");
+}
+
+void aToI() {
+	printf("ft_atoi:      ");
+	if (ft_atoi("+345fgh") != 345) check = 1;
+	printResult();
+
+	if (ft_atoi("  -345fgh") != -345) check = 1;
+	printResult();
+
+	if (ft_atoi("++345fgh") != 0) check = 1;
+	printResult();
+
+	if (ft_atoi("--345fgh") != 0) check = 1;
+	printResult();
+	printf("\n");
+}
+
+void bZero() {
 	char	str[20] = "test me if you can";
 
-	printf("ft_memset:    ");
-	ft_memset(str, '*', 5);
-	if (tester_strncmp(str, "*****", 5)) check = 1;
+	printf("ft_bzero:     ");
+	ft_bzero(str, 5);
+	if (tester_strncmp(str, "\0\0\0\0\0", 5)) check = 1;
 	printResult();
 
-	ft_memset(str, '$', 8);
-	if (tester_strncmp(str, "$$$$$$$$", 8)) check = 1;
+	ft_bzero(str, 8);
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0", 8)) check = 1;
 	printResult();
 
-	ft_memset(str, '#', 12);
-	if (tester_strncmp(str, "############", 12)) check = 1;
+	ft_bzero(str, 12);
+	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0", 12)) check = 1;
 	printResult();
 
-	ft_memset(str, '\0', 16);
+	ft_bzero(str, 16);
 	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16)) check = 1;
+	printResult();
+	printf("\n");
+}
+
+void Calloc() {
+	char	*ptr;
+
+	printf("ft_calloc:    ");
+	ptr = ft_calloc(5, 5);
+	if (tester_strncmp(ptr, "\0\0\0\0\0", 5) != 0) check = 1;
+	printResult();
+	free(ptr);
+
+	ptr = ft_calloc(8, 8);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0", 8) != 0) check = 1;
+	printResult();
+	free(ptr);
+
+	ptr = ft_calloc(12, 12);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0", 12) != 0) check = 1;
+	printResult();
+	free(ptr);
+
+	ptr = ft_calloc(12, 16);
+	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) != 0) check = 1;
+	printResult();
+	free(ptr);
+	printf("\n");
+}
+
+void memChr() {
+	char 	str[] = "Tabula Rasa";
+	char 	to_find = 'l';
+	char	to_find2 = 'u';
+	char	to_find3 = 'b';
+	char	to_find4 = 'a';
+	char	*dest;
+
+	printf("ft_memchr:    ");
+	dest = ft_memchr(str, to_find, 4);
+	if (dest) check = 1;
+	printResult();
+
+	dest = ft_memchr(str, to_find2, 4);
+	if (tester_strncmp(dest, "ula Rasa", 9)) check = 1;
+	printResult();
+
+	dest = ft_memchr(str, to_find3, 3);
+	if (tester_strncmp(dest, "bula Rasa", 10)) check = 1;
+	printResult();
+
+	dest = ft_memchr(str, to_find4, 6);
+	if (tester_strncmp(dest, "abula Rasa", 11)) check = 1;
+	printResult();
+
+	printf("\n");
+}
+
+void memCmp() {
+	printf("ft_memcmp:    ");
+	if (ft_memcmp("Tabula Rasa", "Tabula Rasa", 5)) check = 1;
+	printResult();
+
+	if (ft_memcmp("Tabula Rasa", "TabuLa Rasa", 5) <= 0) check = 1;
+	printResult();
+
+	if (ft_memcmp("Tabula Rasa", "Tabuda Rasa", 5) <= 0) check = 1;
+	printResult();
+
+	if (ft_memcmp("Tab", "Tabula Rasa", 5) >= 0) check = 1;
+	printResult();
+
+	if (ft_memcmp("atoms\0\0\0\0", "atoms\0abc", 8) >= 0) check = 1;
 	printResult();
 	printf("\n");
 }
@@ -199,209 +349,24 @@ void memMove() {
 	printf("\n");
 }
 
-void memChr() {
-	char 	str[] = "Tabula Rasa";
-	char 	to_find = 'l';
-	char	to_find2 = 'u';
-	char	to_find3 = 'b';
-	char	to_find4 = 'a';
-	char	*dest;
-
-	printf("ft_memchr:    ");
-	dest = ft_memchr(str, to_find, 4);
-	if (dest) check = 1;
-	printResult();
-
-	dest = ft_memchr(str, to_find2, 4);
-	if (tester_strncmp(dest, "ula Rasa", 9)) check = 1;
-	printResult();
-
-	dest = ft_memchr(str, to_find3, 3);
-	if (tester_strncmp(dest, "bula Rasa", 10)) check = 1;
-	printResult();
-
-	dest = ft_memchr(str, to_find4, 6);
-	if (tester_strncmp(dest, "abula Rasa", 11)) check = 1;
-	printResult();
-
-	printf("\n");
-}
-
-void memCmp() {
-	printf("ft_memcmp:    ");
-	if (ft_memcmp("Tabula Rasa", "Tabula Rasa", 5)) check = 1;
-	printResult();
-
-	if (ft_memcmp("Tabula Rasa", "TabuLa Rasa", 5) <= 0) check = 1;
-	printResult();
-
-	if (ft_memcmp("Tabula Rasa", "Tabuda Rasa", 5) <= 0) check = 1;
-	printResult();
-
-	if (ft_memcmp("Tab", "Tabula Rasa", 5) >= 0) check = 1;
-	printResult();
-
-	if (ft_memcmp("atoms\0\0\0\0", "atoms\0abc", 8) >= 0) check = 1;
-	printResult();
-	printf("\n");
-}
-
-void bZero() {
+void memSet() {
 	char	str[20] = "test me if you can";
 
-	printf("ft_bzero:     ");
-	ft_bzero(str, 5);
-	if (tester_strncmp(str, "\0\0\0\0\0", 5)) check = 1;
+	printf("ft_memset:    ");
+	ft_memset(str, '*', 5);
+	if (tester_strncmp(str, "*****", 5)) check = 1;
 	printResult();
 
-	ft_bzero(str, 8);
-	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0", 8)) check = 1;
+	ft_memset(str, '$', 8);
+	if (tester_strncmp(str, "$$$$$$$$", 8)) check = 1;
 	printResult();
 
-	ft_bzero(str, 12);
-	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0", 12)) check = 1;
+	ft_memset(str, '#', 12);
+	if (tester_strncmp(str, "############", 12)) check = 1;
 	printResult();
 
-	ft_bzero(str, 16);
+	ft_memset(str, '\0', 16);
 	if (tester_strncmp(str, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16)) check = 1;
-	printResult();
-	printf("\n");
-}
-
-void toUpper() {
-	printf("ft_toupper:   ");
-	if (ft_toupper('9') != '9') check = 1;
-	printResult();
-
-	if (ft_toupper('G') != 'G') check = 1;
-	printResult();
-
-	if (ft_toupper('$') != '$') check = 1;
-	printResult();
-
-	if (ft_toupper('t') != 'T') check = 1;
-	printResult();
-	printf("\n");
-}
-
-void toLower() {
-	printf("ft_tolower:   ");
-	if (ft_tolower('9') != '9') check = 1;
-	printResult();
-
-	if (ft_tolower('G') != 'g') check = 1;
-	printResult();
-
-	if (ft_tolower('$') != '$') check = 1;
-	printResult();
-
-	if (ft_tolower('t') != 't') check = 1;
-	printResult();
-	printf("\n");
-}
-
-void aToI() {
-	printf("ft_atoi:      ");
-	if (ft_atoi("+345fgh") != 345) check = 1;
-	printResult();
-
-	if (ft_atoi("  -345fgh") != -345) check = 1;
-	printResult();
-
-	if (ft_atoi("++345fgh") != 0) check = 1;
-	printResult();
-
-	if (ft_atoi("--345fgh") != 0) check = 1;
-	printResult();
-	printf("\n");
-}
-
-void Calloc() {
-	char	*ptr;
-
-	printf("ft_calloc:    ");
-	ptr = ft_calloc(5, 5);
-	if (tester_strncmp(ptr, "\0\0\0\0\0", 5) != 0) check = 1;
-	printResult();
-	free(ptr);
-
-	ptr = ft_calloc(8, 8);
-	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0", 8) != 0) check = 1;
-	printResult();
-	free(ptr);
-
-	ptr = ft_calloc(12, 12);
-	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0", 12) != 0) check = 1;
-	printResult();
-	free(ptr);
-
-	ptr = ft_calloc(12, 16);
-	if (tester_strncmp(ptr, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) != 0) check = 1;
-	printResult();
-	free(ptr);
-	printf("\n");
-}
-
-void strLen() {
-	printf("ft_strlen:    ");
-	if(ft_strlen("Tabula Rasa") != 11) check = 1;
-	printResult();
-
-	if(ft_strlen("@#$^\t^&*\n") != 9) check = 1;
-	printResult();
-
-	if(ft_strlen("") != 0) check = 1;
-	printResult();
-
-	if(ft_strlen("     ") != 5) check = 1;
-	printResult();
-	printf("\n");
-}
-
-void strLCpy() {
-	char	str[20] = "123456789";
-	char	str2[20] = "abcdefghi";
-	char	str3[20] = "ABCDEFGHI";
-	char	str4[20] = "!@#$^&*()";
-	char	dest[20] = "0";
-
-	printf("ft_strlcpy:   ");
-	ft_strlcpy(dest, str, 3);
-	if (tester_strncmp(dest, "12", 3)) check = 1;
-	printResult();
-
-	ft_strlcpy(dest, str2, 5);
-	if (tester_strncmp(dest, "abcd", 5)) check = 1;
-	printResult();
-
-	ft_strlcpy(dest, str3, 7);
-	if (tester_strncmp(dest, "ABCDEF", 7)) check = 1;
-	printResult();
-
-	ft_strlcpy(dest, str4, 9);
-	if (tester_strncmp(dest, "!@#$^&*(", 9)) check = 1;
-	printResult();
-	printf("\n");
-}
-
-void strLCat() {
-	char str[20] = "i ";
-
-	printf("ft_strlcat:   ");
-	ft_strlcat(str, "don't know what i should write....", 5);
-	if (!tester_strncmp(str, "i don't know what", 6)) check = 1;
-	printResult();
-
-	ft_strlcat(str, " know what i should write....", 5);
-	if (!tester_strncmp(str, "i don't know what", 11)) check = 1;
-	printResult();
-
-	ft_strlcat(str, " what i should write....", 5);
-	if (!tester_strncmp(str, "i don't know what", 16)) check = 1;
-	printResult();
-
-	ft_strlcat(str, " i should write....", 5);
-	if (!tester_strncmp(str, "i don't know what i should", 21)) check = 1;
 	printResult();
 	printf("\n");
 }
@@ -429,78 +394,6 @@ void strChr() {
 
 	dest = ft_strchr(str, to_find4);
 	if (tester_strncmp(dest, "abula Rasa", 11)) check = 1;
-	printResult();
-	printf("\n");
-}
-
-void strRChr() {
-	char 	str[] = "Tabula Rasa";
-	char 	to_find = 's';
-	char	to_find2 = 'R';
-	char	to_find3 = 'l';
-	char	to_find4 = 'b';
-	char	*dest;
-
-	printf("ft_strrchr:   ");
-	dest = ft_strrchr(str, to_find);
-	if (tester_strncmp(dest, "sa", 3)) check = 1;
-	printResult();
-
-	dest = ft_strrchr(str, to_find2);
-	if (tester_strncmp(dest, "Rasa", 5)) check = 1;
-	printResult();
-
-	dest = ft_strrchr(str, to_find3);
-	if (tester_strncmp(dest, "la Rasa", 8)) check = 1;
-	printResult();
-
-	dest = ft_strrchr(str, to_find4);
-	if (tester_strncmp(dest, "bula Rasa", 10)) check = 1;
-	printResult();
-	printf("\n");
-}
-
-void strNCmp() {
-	printf("ft_strncmp:   ");
-	if (ft_strncmp("Tabula Rasa", "Tabula Rasa", 5)) check = 1;
-	printResult();
-
-	if (ft_strncmp("Tabula Rasa", "TabuLa Rasa", 5) <= 0) check = 1;
-	printResult();
-
-	if (ft_strncmp("Tabula Rasa", "Tabuda Rasa", 5) <= 0) check = 1;
-	printResult();
-
-	if (ft_strncmp("Tab", "Tabula Rasa", 5) >= 0) check = 1;
-	printResult();
-
-	if (ft_strncmp("atoms\0\0\0\0", "atoms\0abc", 8)) check = 1;
-	printResult();
-	printf("\n");
-}
-
-void strNStr() {
-	char 	str[] = "Tabula Rasa";
-	char 	*to_find = "sa";
-	char	*to_find2 = "Ras";
-	char	*to_find3 = "la";
-	char	*dest;
-
-	printf("ft_strnstr:   ");
-	dest = ft_strnstr(str, to_find, 12);
-	if (tester_strncmp(dest, "sa", 3)) check = 1;
-	printResult();
-
-	dest = ft_strnstr(str, to_find2, 12);
-	if (tester_strncmp(dest, "Rasa", 5)) check = 1;
-	printResult();
-
-	dest = ft_strnstr(str, to_find3, 6);
-	if (tester_strncmp(dest, "la Rasa", 8)) check = 1;
-	printResult();
-
-	dest = ft_strnstr(str, to_find2, 5);
-	if (dest) check = 1;
 	printResult();
 	printf("\n");
 }
@@ -534,6 +427,152 @@ void strDup() {
 	free(dest);
 	printf("\n");
 }
+
+void strLCat() {
+	char str[20] = "i ";
+
+	printf("ft_strlcat:   ");
+	ft_strlcat(str, "don't know what i should write....", 5);
+	if (!tester_strncmp(str, "i don't know what", 6)) check = 1;
+	printResult();
+
+	ft_strlcat(str, " know what i should write....", 5);
+	if (!tester_strncmp(str, "i don't know what", 11)) check = 1;
+	printResult();
+
+	ft_strlcat(str, " what i should write....", 5);
+	if (!tester_strncmp(str, "i don't know what", 16)) check = 1;
+	printResult();
+
+	ft_strlcat(str, " i should write....", 5);
+	if (!tester_strncmp(str, "i don't know what i should", 21)) check = 1;
+	printResult();
+	printf("\n");
+}
+
+void strLCpy() {
+	char	str[20] = "123456789";
+	char	str2[20] = "abcdefghi";
+	char	str3[20] = "ABCDEFGHI";
+	char	str4[20] = "!@#$^&*()";
+	char	dest[20] = "0";
+
+	printf("ft_strlcpy:   ");
+	ft_strlcpy(dest, str, 3);
+	if (tester_strncmp(dest, "12", 3)) check = 1;
+	printResult();
+
+	ft_strlcpy(dest, str2, 5);
+	if (tester_strncmp(dest, "abcd", 5)) check = 1;
+	printResult();
+
+	ft_strlcpy(dest, str3, 7);
+	if (tester_strncmp(dest, "ABCDEF", 7)) check = 1;
+	printResult();
+
+	ft_strlcpy(dest, str4, 9);
+	if (tester_strncmp(dest, "!@#$^&*(", 9)) check = 1;
+	printResult();
+	printf("\n");
+}
+
+void strLen() {
+	printf("ft_strlen:    ");
+	if(ft_strlen("Tabula Rasa") != 11) check = 1;
+	printResult();
+
+	if(ft_strlen("@#$^\t^&*\n") != 9) check = 1;
+	printResult();
+
+	if(ft_strlen("") != 0) check = 1;
+	printResult();
+
+	if(ft_strlen("     ") != 5) check = 1;
+	printResult();
+	printf("\n");
+}
+
+void strNCmp() {
+	printf("ft_strncmp:   ");
+	if (ft_strncmp("Tabula Rasa", "Tabula Rasa", 5)) check = 1;
+	printResult();
+
+	if (ft_strncmp("Tabula Rasa", "TabuLa Rasa", 5) <= 0) check = 1;
+	printResult();
+
+	if (ft_strncmp("Tabula Rasa", "Tabuda Rasa", 5) <= 0) check = 1;
+	printResult();
+
+	if (ft_strncmp("Tab", "Tabula Rasa", 5) >= 0) check = 1;
+	printResult();
+
+	if (ft_strncmp("atoms\0\0\0\0", "atoms\0abc", 8)) check = 1;
+	printResult();
+	printf("\n");
+}
+
+
+
+
+
+void strRChr() {
+	char 	str[] = "Tabula Rasa";
+	char 	to_find = 's';
+	char	to_find2 = 'R';
+	char	to_find3 = 'l';
+	char	to_find4 = 'b';
+	char	*dest;
+
+	printf("ft_strrchr:   ");
+	dest = ft_strrchr(str, to_find);
+	if (tester_strncmp(dest, "sa", 3)) check = 1;
+	printResult();
+
+	dest = ft_strrchr(str, to_find2);
+	if (tester_strncmp(dest, "Rasa", 5)) check = 1;
+	printResult();
+
+	dest = ft_strrchr(str, to_find3);
+	if (tester_strncmp(dest, "la Rasa", 8)) check = 1;
+	printResult();
+
+	dest = ft_strrchr(str, to_find4);
+	if (tester_strncmp(dest, "bula Rasa", 10)) check = 1;
+	printResult();
+	printf("\n");
+}
+
+
+
+void strNStr() {
+	char 	str[] = "Tabula Rasa";
+	char 	*to_find = "sa";
+	char	*to_find2 = "Ras";
+	char	*to_find3 = "la";
+	char	*dest;
+
+	printf("ft_strnstr:   ");
+	dest = ft_strnstr(str, to_find, 12);
+	if (tester_strncmp(dest, "sa", 3)) check = 1;
+	printResult();
+
+	dest = ft_strnstr(str, to_find2, 12);
+	if (tester_strncmp(dest, "Rasa", 5)) check = 1;
+	printResult();
+
+	dest = ft_strnstr(str, to_find3, 6);
+	if (tester_strncmp(dest, "la Rasa", 8)) check = 1;
+	printResult();
+
+	dest = ft_strnstr(str, to_find2, 5);
+	if (dest) check = 1;
+	printResult();
+	printf("\n");
+}
+
+
+
+// Additional functions
 
 void subStr() {
 	char	*str = "get this part of the string";
@@ -679,13 +718,6 @@ void iToA() {
 	printResult();
 	free(dest);
 	printf("\n");
-}
-
-static char mapitest(unsigned int i, char c) {
-	if (i % 2 == 0)
-		return toupper(c);
-	else
-		return tolower(c);
 }
 
 void strMapi() {
@@ -885,23 +917,7 @@ void putNbr_fd() {
 	printf("\n");
 }
 
-void *my_map(void *content) {
-	return ft_strdup(content + 1); // remove first char
-}
-
-void del_map(void *content) {
-	free(content);
-}
-
-void my_iter(void *content) {
-	char *str = (char *)content;
-	while (*str)
-	{
-		if (*str >= 'a' && *str <= 'z')
-			*str -= 32;
-		str++;
-	}
-}
+// Linked list functions
 
 void Lst() {
 	t_list	*lst;
@@ -1002,7 +1018,7 @@ int	main() {
 	putEndl_fd();
 	putNbr_fd();
 	putStr_fd();
-	printf("\nLinked list:\n");
+	printf("\nLinked list functions:\n");
 	Lst();
 	return 0;
 }
